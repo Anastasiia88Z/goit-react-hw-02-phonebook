@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Container from './components/Container/Container';
+import Form from './components/Form/Form.jsx';
+import s from './App.module.css';
 
 class App extends Component {
   state = {
@@ -10,15 +12,9 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <label htmlFor={this.nameInputId}>
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-          />
-        </label>
+        <h1 className={s.title}>Phonebook</h1>
+        <Form></Form>
+        <h2 className={s.contacts}>Contacts</h2>
       </Container>
     );
   }
