@@ -17,7 +17,7 @@ export default class Form extends Component {
     const { name, number } = this.state;
 
     e.preventDefault();
-    this.props.proponSubmit(name, number);
+    this.props.onSubmit(name, number);
 
     this.reset();
   };
@@ -39,7 +39,7 @@ export default class Form extends Component {
   render() {
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
-        <label htmlFor={this.state.name}>
+        <label htmlFor={this.state.name} className={s.label}>
           Name
           <input
             className={s.input}
@@ -54,7 +54,7 @@ export default class Form extends Component {
           />
         </label>
 
-        <label htmlFor={this.state.number}>
+        <label htmlFor={this.state.number} className={s.label}>
           Number
           <input
             className={s.input}

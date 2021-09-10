@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from './components/Container/Container';
 import Form from './components/Form/Form.jsx';
 import ListContacts from './components/ListContacts/ListContacts.jsx';
-import Filter from './components/Form/Form.jsx';
+import Filter from './components/Filter/Filter.jsx';
 import s from './App.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,28 +17,25 @@ export default class App extends Component {
     filter: '',
   };
 
-  handleAddContact = data => {
-    if (
-      this.state.contacts.find(
-        contact => contact.name.toLowerCase() === data.name.toLowerCase(),
-      )
-    ) {
-      alert(`${data.name} is already in contacts.`);
-    } else if (
-      this.state.contacts.find(contact => contact.number === data.number)
-    ) {
-      alert(`This number ${data.number} is already in contacts`);
-    } else {
-      const newContact = {
-        id: uuidv4(),
-        name: data.name,
-        number: data.number,
-      };
+  handleAddContact = (name, number) => {
+    const newContact = {
+      id: uuidv4(),
+      name,
+      number,
+    };
 
-      this.setState(prevState => ({
+    this.setState(prevState => {
+      const duplicateContact = this.state.contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase(),
+      );
+      if (duplicateContact) {
+        alert(`${name} is alredy in contacts`);
+        return { ...prevState };
+      }
+      return {
         contacts: [newContact, ...prevState.contacts],
-      }));
-    }
+      };
+    });
   };
 
   handleDeleteContacts = id => {
