@@ -7,7 +7,6 @@ export default function ListContacts({ contacts, onDelete }) {
     <ul className={s.list}>
       {contacts.map(contact => (
         <li key={contact.id} className={s.item}>
-          {' '}
           {contact.name} : {contact.number}
           <button
             className={s.button}

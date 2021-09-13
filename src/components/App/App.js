@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Container from './components/Container/Container';
-import Form from './components/Form/Form.jsx';
-import ListContacts from './components/ListContacts/ListContacts.jsx';
-import Filter from './components/Filter/Filter.jsx';
-import s from './App.module.css';
 import { v4 as uuidv4 } from 'uuid';
+import Container from '../Container/Container';
+import Form from '../Form/Form.jsx';
+import ListContacts from '../ListContacts/ListContacts.jsx';
+import Filter from '../Filter/Filter.jsx';
+import s from './App.module.css';
 
 export default class App extends Component {
   state = {
@@ -28,13 +28,13 @@ export default class App extends Component {
       const duplicateContact = this.state.contacts.find(
         contact => contact.name.toLowerCase() === name.toLowerCase(),
       );
-      if (duplicateContact) {
-        alert(`${name} is alredy in contacts`);
-        return { ...prevState };
-      }
-      return {
+
+      const newState = {
         contacts: [newContact, ...prevState.contacts],
       };
+      return duplicateContact
+        ? alert(`${name} is already in contacts`)
+        : newState;
     });
   };
 
@@ -64,7 +64,7 @@ export default class App extends Component {
     return (
       <Container>
         <h1 className={s.title}>Phonebook</h1>
-        <Form onSubmit={this.handleAddContact}></Form>
+        <Form onSubmit={this.handleAddContact} />
 
         <h2 className={s.contacts}>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
@@ -72,7 +72,7 @@ export default class App extends Component {
         <ListContacts
           contacts={visibleContacts}
           onDelete={this.handleDeleteContacts}
-        ></ListContacts>
+        />
       </Container>
     );
   }

@@ -4,6 +4,7 @@
   background-color: hsl(54, 94%, 54%);
   margin-left: auto;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .item {

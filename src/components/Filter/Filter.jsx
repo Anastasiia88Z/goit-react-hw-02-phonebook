@@ -12,7 +12,7 @@ const Filter = ({ value, onChange }) => {
         id={'lab'}
         value={value}
         onChange={onChange}
-      ></input>
+      />
     </label>
   );
 };
